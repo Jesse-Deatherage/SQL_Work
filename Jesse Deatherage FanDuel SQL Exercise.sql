@@ -36,7 +36,7 @@ GROUP BY Month;
 --#5. Registration to activation ratio from January to April 2019
 SELECT 
     DATE_FORMAT(u.registration_date, '%Y-%m') as Month,
-    COUNT(IF(u.activation_date IS NOT NULL, 1, NULL)) / COUNT(u.playerid) * 100 as reg_to_act_ratio
+    COUNT(CASE WHEN u.activation_date IS NOT NULL THEN 1 END) / COUNT(u.playerid) as reg_to_act_ratio
 FROM user u
 WHERE u.registration_date BETWEEN '2019-01-01' AND '2019-04-30'
 GROUP BY Month;
